@@ -18,6 +18,7 @@ public:
     Playlist(string title);
 
     void addTrack(Track *track);
+    void removeTrack(string title);
 
     virtual ~Playlist();
 private:

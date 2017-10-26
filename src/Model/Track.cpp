@@ -25,6 +25,11 @@ void Track::displayDescription() {
     cout << "/////////////////////////////////" << endl;
 }
 
+string Track::getTitle() {
+    return title;
+}
+
+
 string Track::getCodecTitle() {
     switch (codecType) {
         case AAC:
