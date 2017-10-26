@@ -17,8 +17,9 @@ public:
     Playlist();
     Playlist(string title);
 
-    virtual ~Playlist();
+    void addTrack(Track *track);
 
+    virtual ~Playlist();
 private:
     string title;
     vector<Track*> tracks;

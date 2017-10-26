@@ -16,6 +16,10 @@ Playlist::Playlist(string title) {
     this->totalDuration = 0;
 }
 
+void Playlist::addTrack(Track *track) {
+    tracks.push_back(track);
+}
+
 Playlist::~Playlist() {
     for (vector<Track*>::iterator it = tracks.begin() ; it != tracks.end(); ++it) {
         delete (*it);
