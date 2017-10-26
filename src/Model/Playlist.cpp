@@ -28,8 +28,21 @@ void Playlist::removeTrack(string title) {
     }
 }
 
+int Playlist::removeDuplicates() {
+    int deleted = 0;
+    for (vector<Track*>::iterator it = tracks.begin(); it != tracks.end(); ++it) {
+        for (vector<Track*>::iterator itDel = it+1; it != tracks.end(); ++itDel) {
+            if((*it)->getTitle() == (*itDel)->getTitle()) {
+                itDel = tracks.erase(itDel);
+                deleted++;
+            }
+        }
+    }
+    return deleted;
+}
+
 Playlist::~Playlist() {
-    for (vector<Track*>::iterator it = tracks.begin() ; it != tracks.end(); ++it) {
+    for (vector<Track *>::iterator it = tracks.begin(); it != tracks.end(); ++it) {
         delete (*it);
     }
     tracks.clear();

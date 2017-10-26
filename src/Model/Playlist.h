@@ -19,8 +19,10 @@ public:
 
     void addTrack(Track *track);
     void removeTrack(string title);
+    int removeDuplicates();
 
     virtual ~Playlist();
+
 private:
     string title;
     vector<Track*> tracks;
