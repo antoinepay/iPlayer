@@ -19,9 +19,14 @@ class Player : public Receiver {
 
 public:
     Player();
+    void setCommand(COMMAND_TYPE commandType, string parameter);
+    string getResult();
+
 
     virtual ~Player();
 private:
+    COMMAND_TYPE currentCommand;
+    string parameterForCommand;
     bool playing;
     Track *currentTrack;
     map<string, Playlist*> playlists;

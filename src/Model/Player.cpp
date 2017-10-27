@@ -13,6 +13,14 @@ Player::Player() {
     this->parameterForCommand = "";
 }
 
+void Player::setCommand(COMMAND_TYPE commandType, string parameter) {
+    currentCommand = commandType;
+    parameterForCommand = parameter;
+}
+
+string Player::getResult() {
+}
+
 Player::~Player() {
     delete currentTrack;
     for (vector<Track *>::iterator it = previousTracks.begin(); it != previousTracks.end(); ++it) {
