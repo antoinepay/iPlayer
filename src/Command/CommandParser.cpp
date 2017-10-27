@@ -12,12 +12,17 @@ Command* CommandParser::parse(string line, Receiver *receiver) {
     } else if(commandWord == "pause") {
         return new PauseCommand(receiver,"");
     } else if(commandWord == "create_playlist") {
-        if(line.find(' ') != string::npos) {
-            parameter = line.substr(line.find(' ') + 1);
-        } else {
-            parameter = "";
-        }
-        return new CreatePlaylistCommand(receiver, parameter);
+        return new CreatePlaylistCommand(receiver, findParameter(line));
+    } else if(commandWord == "add_track") {
+        return new AddTrackCommand(receiver, findParameter(line));
     }
     return nullptr;
+}
+
+string CommandParser::findParameter(string line) {
+    if(line.find(' ') != string::npos) {
+        return line.substr(line.find(' ') + 1);
+    } else {
+        return "";
+    }
 }

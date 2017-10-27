@@ -8,6 +8,7 @@
 #include <map>
 #include "../Command/Receiver.h"
 #include "Playlist.h"
+#include "../Repository/MusicManager.h"
 
 enum REPEAT_MODE {
     ONE,
@@ -30,6 +31,7 @@ private:
     bool playing;
     Track *currentTrack;
     map<string, Playlist*> playlists;
+    Playlist *currentPlaylist;
     REPEAT_MODE repeatMode;
     bool random;
     vector<Track*> previousTracks;
@@ -41,6 +43,7 @@ private:
     // Command handlers
     string handlePlay();
     string handleCreatePlaylist();
+    string handleAddTrack();
 };
 
 

@@ -11,6 +11,7 @@ Player::Player() {
     this->currentTrack = nullptr;
     this->currentCommand = COMMAND_TYPE::NONE;
     this->parameterForCommand = "";
+    this->currentPlaylist = nullptr;
 }
 
 void Player::setCommand(COMMAND_TYPE commandType, string parameter) {
@@ -27,6 +28,8 @@ string Player::getResult() {
             return "Player is paused";
         case CREATE_PLAYLIST:
             return handleCreatePlaylist();
+        case ADD_TRACK:
+            return handleAddTrack();
     }
 }
 
@@ -61,6 +64,26 @@ string Player::handleCreatePlaylist() {
         return "Playlist " + parameterForCommand + " created";
     } else {
         return "Error : No playlist title given!";
+    }
+}
+
+string Player::handleAddTrack() {
+    if(!parameterForCommand.empty()) {
+        MusicManager &musicManager = MusicManager::Instance();
+        Track *track = musicManager.getTrack(parameterForCommand);
+        if(track != nullptr) {
+            if(currentPlaylist == nullptr) {
+                string playlistTitle = "New playlist";
+                currentPlaylist = new Playlist(playlistTitle);
+                playlists[playlistTitle] = currentPlaylist;
+            }
+            currentPlaylist->addTrack(track);
+            return "Track "+track->getTitle()+ " added";
+        } else {
+            return "Error : Music not found";
+        }
+    } else {
+        return "Error : No music title given!";
     }
 }
 

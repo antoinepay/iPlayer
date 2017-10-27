@@ -10,6 +10,7 @@
 #include "../CommandType/PlayCommand.h"
 #include "../CommandType/PauseCommand.h"
 #include "../CommandType/CreatePlaylistCommand.h"
+#include "../CommandType/AddTrackCommand.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
     static Command* parse(string line, Receiver *receiver);
 private:
     CommandParser() {}
+    static string findParameter(string line);
 };
 
 
