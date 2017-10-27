@@ -26,7 +26,7 @@ public:
     Track();
     Track(string title, int duration, CODEC_TYPE codecType);
 
-    void displayDescription();
+    string getDescription();
     string getTitle();
 
     virtual ~Track() {}

@@ -12,6 +12,7 @@
 #include "../CommandType/CreatePlaylistCommand.h"
 #include "../CommandType/AddTrackCommand.h"
 #include "../CommandType/LoadPlaylistCommand.h"
+#include "../CommandType/ShowTrackCommand.h"
 
 using namespace std;
 

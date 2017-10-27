@@ -32,6 +32,9 @@ string Player::getResult() {
             return handleAddTrack();
         case LOAD_PLAYLIST:
             return handleLoadPlaylist();
+        case SHOW_TRACK:
+            return handleShowTrack();
+
     }
 }
 
@@ -93,6 +96,13 @@ string Player::handleLoadPlaylist() {
     if(playlists.count(parameterForCommand) == 1) {
         currentPlaylist = playlists[parameterForCommand];
     }
+}
+
+string Player::handleShowTrack() {
+    if (currentTrack != nullptr) {
+        return currentTrack->getDescription();
+    }
+    return "Error : No track loaded";
 }
 
 Player::~Player() {

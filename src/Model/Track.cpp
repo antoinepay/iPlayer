@@ -16,13 +16,14 @@ Track::Track(string title, int duration, CODEC_TYPE codecType) {
 }
 
 
-void Track::displayDescription() {
-    cout << "/////////////////////////////////" << endl;
-    cout << "Track information " << endl;
-    cout << "Title : " << title << endl;
-    cout << "Duration : " << duration << endl;
-    cout << "Codec : " << this->getCodecTitle() << endl;
-    cout << "/////////////////////////////////" << endl;
+string Track::getDescription() {
+    string description = "/////////////////////////////////\n";
+    description += "Track information\n";
+    description += "Title : " + title + "\n";
+    description += "Duration : " + to_string(duration) + "\n";
+    description += "Codec : " + getCodecTitle() + "\n";
+    description += "/////////////////////////////////\n";
+    return description;
 }
 
 string Track::getTitle() {

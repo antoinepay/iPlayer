@@ -6,17 +6,19 @@
 
 Command* CommandParser::parse(string line, Receiver *receiver) {
     string commandWord = line.substr(0, line.find(' '));
-    string parameter;
+    string parameter = findParameter(line);
     if(commandWord == "play") {
-        return new PlayCommand(receiver,"");
+        return new PlayCommand(receiver,parameter);
     } else if(commandWord == "pause") {
-        return new PauseCommand(receiver,"");
+        return new PauseCommand(receiver,parameter);
     } else if(commandWord == "create_playlist") {
-        return new CreatePlaylistCommand(receiver, findParameter(line));
+        return new CreatePlaylistCommand(receiver, parameter);
     } else if(commandWord == "add_track") {
-        return new AddTrackCommand(receiver, findParameter(line));
+        return new AddTrackCommand(receiver, parameter);
     } else if(commandWord == "load_playlist") {
-        return new LoadPlaylistCommand(receiver, findParameter(line));
+        return new LoadPlaylistCommand(receiver, parameter);
+    } else if(commandWord == "show_track") {
+        return new ShowTrackCommand(receiver, parameter);
     }
     return nullptr;
 }

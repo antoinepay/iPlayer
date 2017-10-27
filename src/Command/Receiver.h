@@ -16,6 +16,7 @@ enum COMMAND_TYPE
     CREATE_PLAYLIST,
     ADD_TRACK,
     LOAD_PLAYLIST,
+    SHOW_TRACK,
     NONE
     // Add other commands
 };
