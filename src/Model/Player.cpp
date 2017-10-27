@@ -25,6 +25,8 @@ string Player::getResult() {
         case PAUSE:
             playing = false;
             return "Player is paused";
+        case CREATE_PLAYLIST:
+            return handleCreatePlaylist();
     }
 }
 
@@ -52,6 +54,16 @@ string Player::handlePlay() {
     return "Player is now playing " + currentTrack->getTitle();
 }
 
+string Player::handleCreatePlaylist() {
+    if(!parameterForCommand.empty()) {
+        Playlist *playlist = new Playlist(parameterForCommand);
+        playlists[parameterForCommand] = playlist;
+        return "Playlist " + parameterForCommand + " created";
+    } else {
+        return "Error : No playlist title given!";
+    }
+}
+
 Player::~Player() {
     delete currentTrack;
     for (vector<Track *>::iterator it = previousTracks.begin(); it != previousTracks.end(); ++it) {
@@ -62,7 +74,7 @@ Player::~Player() {
         delete (*it);
     }
     nextTracks.clear();
-    for (map<string, Playlist*>::iterator it = playlists.begin(); it != playlists.end(); ++it) {
+    for (map<string, Playlist *>::iterator it = playlists.begin(); it != playlists.end(); ++it) {
         delete it->second;
     }
     playlists.clear();

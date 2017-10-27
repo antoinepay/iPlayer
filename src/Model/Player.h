@@ -40,6 +40,7 @@ private:
 
     // Command handlers
     string handlePlay();
+    string handleCreatePlaylist();
 };
 
 
