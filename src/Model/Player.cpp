@@ -63,6 +63,7 @@ bool Player::loadNextTrack() {
 
 void Player::initNextTracks() {
     if(currentPlaylist != nullptr) {
+        nextTracks.clear();
         vector<Track*> *tracks = currentPlaylist->getTracks();
         for (vector<Track*>::iterator it = tracks->begin(); it!=tracks->end(); ++it) {
             nextTracks.push_back(*it);
@@ -149,12 +150,30 @@ bool Player::removeTrack(string &title) {
     }
     return deleted;
 }
+
+string Player::getPreviousTracksList() {
+    int i = 1;
+    string list = "";
+    for (vector<Track*>::iterator it = previousTracks.begin(); it!=previousTracks.end(); ++it) {
+        list += "   - " + to_string(i++) + " : " + (*it)->getTitle() + "\n";
+    }
+    return i > 1 ? list : "None\n";
+}
+
+string Player::getNextTracksList() {
+    int i = 1;
+    string list = "";
+    for (vector<Track*>::iterator it = nextTracks.begin(); it!=nextTracks.end(); ++it) {
+        list += "   - " + to_string(i++) + " : " + (*it)->getTitle() + "\n";
+    }
+    return i > 1 ? list : "None\n";
+}
+
 bool Player::setRandom(bool enable) {
     random = enable;
     random ? shuffleNextTracks() : restoreNextTracksOrder();
     return random;
 }
-
 
 // Command handlers
 
@@ -188,8 +207,12 @@ string Player::handleAddTrack() {
                 string playlistTitle = "New playlist";
                 currentPlaylist = new Playlist(playlistTitle);
                 playlists[playlistTitle] = currentPlaylist;
+                currentPlaylist->addTrack(track);
+                initNextTracks();
+            } else {
+                currentPlaylist->addTrack(track);
+                nextTracks.push_back(track);
             }
-            currentPlaylist->addTrack(track);
             return "Track "+track->getTitle()+ " added to "+currentPlaylist->getTitle();
         } else {
             return "Error : Music not found";
@@ -217,7 +240,16 @@ string Player::handleShowTrack() {
 
 string Player::handleShowPlaylist() {
     if(currentPlaylist != nullptr) {
-        return currentPlaylist->getDescription();
+        string description = "/////////////////////////////////\n";
+        description += currentPlaylist->getDescription();
+        description += "\nPrevious tracks :\n";
+        description += getPreviousTracksList();
+        description += "\nPlaying : \n";
+        description += playing ? currentTrack->getDescription() : "None";
+        description += "\n\nNext tracks :\n";
+        description += getNextTracksList();
+        description += "/////////////////////////////////\n";
+        return description;
     }
     return "Error : No playlist loaded";
 }

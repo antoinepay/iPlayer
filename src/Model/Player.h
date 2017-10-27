@@ -45,6 +45,8 @@ private:
     void shuffleNextTracks();
     void restoreNextTracksOrder();
     bool removeTrack(string &title);
+    string getPreviousTracksList();
+    string getNextTracksList();
 
     bool setRandom(bool enable);
 
