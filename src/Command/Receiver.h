@@ -15,6 +15,7 @@ enum COMMAND_TYPE
     PAUSE,
     CREATE_PLAYLIST,
     ADD_TRACK,
+    LOAD_PLAYLIST,
     NONE
     // Add other commands
 };

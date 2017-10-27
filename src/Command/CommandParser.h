@@ -11,6 +11,7 @@
 #include "../CommandType/PauseCommand.h"
 #include "../CommandType/CreatePlaylistCommand.h"
 #include "../CommandType/AddTrackCommand.h"
+#include "../CommandType/LoadPlaylistCommand.h"
 
 using namespace std;
 

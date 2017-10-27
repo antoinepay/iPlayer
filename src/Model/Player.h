@@ -44,6 +44,7 @@ private:
     string handlePlay();
     string handleCreatePlaylist();
     string handleAddTrack();
+    string handleLoadPlaylist();
 };
 
 

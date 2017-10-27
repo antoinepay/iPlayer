@@ -15,6 +15,8 @@ Command* CommandParser::parse(string line, Receiver *receiver) {
         return new CreatePlaylistCommand(receiver, findParameter(line));
     } else if(commandWord == "add_track") {
         return new AddTrackCommand(receiver, findParameter(line));
+    } else if(commandWord == "load_playlist") {
+        return new LoadPlaylistCommand(receiver, findParameter(line));
     }
     return nullptr;
 }

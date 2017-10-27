@@ -30,6 +30,8 @@ string Player::getResult() {
             return handleCreatePlaylist();
         case ADD_TRACK:
             return handleAddTrack();
+        case LOAD_PLAYLIST:
+            return handleLoadPlaylist();
     }
 }
 
@@ -84,6 +86,12 @@ string Player::handleAddTrack() {
         }
     } else {
         return "Error : No music title given!";
+    }
+}
+
+string Player::handleLoadPlaylist() {
+    if(playlists.count(parameterForCommand) == 1) {
+        currentPlaylist = playlists[parameterForCommand];
     }
 }
 
