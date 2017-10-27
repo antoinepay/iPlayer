@@ -19,6 +19,37 @@ void Player::setCommand(COMMAND_TYPE commandType, string parameter) {
 }
 
 string Player::getResult() {
+    switch (currentCommand) {
+        case PLAY:
+            return handlePlay();
+        case PAUSE:
+            playing = false;
+            return "Player is paused";
+    }
+}
+
+bool Player::isTrackLoaded() {
+    return currentTrack != nullptr;
+}
+
+bool Player::loadNextTrack() {
+    if(!nextTracks.empty()) {
+        currentTrack = nextTracks.front();
+        nextTracks.erase(nextTracks.begin());
+        return true;
+    }
+    return false;
+}
+
+string Player::handlePlay() {
+    if(isTrackLoaded()) {
+        playing = true;
+    } else if(loadNextTrack()) {
+        playing = true;
+    } else {
+        return "Impossible to play, no musics loaded";
+    }
+    return "Player is now playing " + currentTrack->getTitle();
 }
 
 Player::~Player() {

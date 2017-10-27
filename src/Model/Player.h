@@ -34,6 +34,12 @@ private:
     bool random;
     vector<Track*> previousTracks;
     vector<Track*> nextTracks;
+
+    bool isTrackLoaded();
+    bool loadNextTrack();
+
+    // Command handlers
+    string handlePlay();
 };
 
 
