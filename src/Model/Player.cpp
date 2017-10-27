@@ -44,6 +44,8 @@ string Player::getResult() {
             return handleRemoveTrack();
         case REMOVE_DUPLICATES:
             return handleRemoveDuplicates();
+        case NEXT:
+            return handleNextCommand();
 
     }
 }
@@ -288,6 +290,19 @@ string Player::handleRemoveDuplicates() {
     int deleted = currentPlaylist->removeDuplicates();
     initNextTracks();
     return to_string(deleted) + " tracks deleted";
+}
+
+string Player::handleNextCommand() {
+    if(currentTrack != nullptr) {
+        previousTracks.push_back(currentTrack);
+    }
+    bool loaded = loadNextTrack();
+    playing = loaded;
+    if(playing) {
+        return "Player is now playing " + currentTrack->getTitle();
+    } else {
+        return "End of playlist";
+    }
 }
 
 Player::~Player() {

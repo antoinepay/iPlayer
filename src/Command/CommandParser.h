@@ -18,6 +18,7 @@
 #include "../CommandType/RandomCommand.h"
 #include "../CommandType/RemoveTrackCommand.h"
 #include "../CommandType/RemoveDuplicatesCommand.h"
+#include "../CommandType/NextCommand.h"
 
 using namespace std;
 

@@ -62,7 +62,7 @@ private:
     string handleRandom();
     string handleRemoveTrack();
     string handleRemoveDuplicates();
-
+    string handleNextCommand();
 };
 
 
