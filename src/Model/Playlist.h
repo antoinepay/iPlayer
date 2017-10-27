@@ -21,6 +21,8 @@ public:
     void removeTrack(string title);
     int removeDuplicates();
 
+    string getTitle();
+
     virtual ~Playlist();
 
 private:

@@ -41,6 +41,10 @@ int Playlist::removeDuplicates() {
     return deleted;
 }
 
+string Playlist::getTitle() {
+    return title;
+}
+
 Playlist::~Playlist() {
     for (vector<Track *>::iterator it = tracks.begin(); it != tracks.end(); ++it) {
         delete (*it);
