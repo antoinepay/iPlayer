@@ -21,6 +21,7 @@ enum COMMAND_TYPE
     REPEAT,
     RANDOM,
     REMOVE_TRACK,
+    REMOVE_DUPLICATES,
     NONE
     // Add other commands
 };

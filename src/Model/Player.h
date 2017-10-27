@@ -59,6 +59,7 @@ private:
     string handleRepeat();
     string handleRandom();
     string handleRemoveTrack();
+    string handleRemoveDuplicates();
 
 };
 

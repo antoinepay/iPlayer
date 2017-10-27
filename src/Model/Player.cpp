@@ -42,6 +42,8 @@ string Player::getResult() {
             return handleRandom();
         case REMOVE_TRACK:
             return handleRemoveTrack();
+        case REMOVE_DUPLICATES:
+            return handleRemoveDuplicates();
 
     }
 }
@@ -248,6 +250,12 @@ string Player::handleRemoveTrack() {
         return "Track "+parameterForCommand+ " not found";
     }
     return "Error : No track title given!";
+}
+
+string Player::handleRemoveDuplicates() {
+    int deleted = currentPlaylist->removeDuplicates();
+    initNextTracks();
+    return to_string(deleted) + " tracks deleted";
 }
 
 Player::~Player() {
