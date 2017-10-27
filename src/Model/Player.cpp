@@ -78,7 +78,7 @@ string Player::handleAddTrack() {
                 playlists[playlistTitle] = currentPlaylist;
             }
             currentPlaylist->addTrack(track);
-            return "Track "+track->getTitle()+ " added";
+            return "Track "+track->getTitle()+ " added to "+currentPlaylist->getTitle();
         } else {
             return "Error : Music not found";
         }
