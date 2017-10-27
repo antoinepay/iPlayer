@@ -20,6 +20,7 @@ enum COMMAND_TYPE
     SHOW_PLAYLIST,
     REPEAT,
     RANDOM,
+    REMOVE_TRACK,
     NONE
     // Add other commands
 };

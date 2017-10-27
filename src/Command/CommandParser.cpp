@@ -25,6 +25,8 @@ Command* CommandParser::parse(string line, Receiver *receiver) {
         return new RepeatCommand(receiver, parameter);
     } else if(commandWord == "random") {
         return new RandomCommand(receiver, parameter);
+    } else if(commandWord == "remove_track") {
+        return new RemoveTrackCommand(receiver, parameter);
     }
     return nullptr;
 }

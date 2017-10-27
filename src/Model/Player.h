@@ -44,6 +44,7 @@ private:
     string getRepeatModeTitle(REPEAT_MODE mode);
     void shuffleNextTracks();
     void restoreNextTracksOrder();
+    bool removeTrack(string &title);
 
     bool setRandom(bool enable);
 
@@ -57,6 +58,7 @@ private:
     string handleShowPlaylist();
     string handleRepeat();
     string handleRandom();
+    string handleRemoveTrack();
 
 };
 

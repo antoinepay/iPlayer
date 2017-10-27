@@ -40,6 +40,8 @@ string Player::getResult() {
             return handleRepeat();
         case RANDOM:
             return handleRandom();
+        case REMOVE_TRACK:
+            return handleRemoveTrack();
 
     }
 }
@@ -113,6 +115,38 @@ void Player::restoreNextTracksOrder() {
     nextTracks = newNextTracks;
 }
 
+bool Player::removeTrack(string &title) {
+    if(currentPlaylist == nullptr) {
+        return false;
+    }
+    bool deleted = false;
+    vector<Track*> *playlistTracks = currentPlaylist->getTracks();
+    for (vector<Track*>::iterator it = playlistTracks->begin(); it!=playlistTracks->end();) {
+        if((*it)->getTitle() == title) {
+            it = playlistTracks->erase(it);
+            deleted = true;
+        } else {
+            ++it;
+        }
+    }
+    for (vector<Track*>::iterator it = previousTracks.begin(); it<previousTracks.end();) {
+        if((*it)->getTitle() == title) {
+            it = previousTracks.erase(it);
+            deleted = true;
+        } else {
+            ++it;
+        }
+    }
+    for (vector<Track*>::iterator it = nextTracks.begin(); it<nextTracks.end();) {
+        if((*it)->getTitle() == title) {
+            it = nextTracks.erase(it);
+            deleted = true;
+        } else {
+            ++it;
+        }
+    }
+    return deleted;
+}
 bool Player::setRandom(bool enable) {
     random = enable;
     random ? shuffleNextTracks() : restoreNextTracksOrder();
@@ -204,6 +238,16 @@ string Player::handleRandom() {
         return "Random is " + state;
     }
     return "Error : Random mode not given, should be on or off";
+}
+
+string Player::handleRemoveTrack() {
+    if(!parameterForCommand.empty()) {
+        if(removeTrack(parameterForCommand)) {
+            return "Track "+parameterForCommand+ " deleted";
+        }
+        return "Track "+parameterForCommand+ " not found";
+    }
+    return "Error : No track title given!";
 }
 
 Player::~Player() {
