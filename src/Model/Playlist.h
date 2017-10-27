@@ -5,7 +5,7 @@
 #ifndef IPLAYER_PLAYLIST_H
 #define IPLAYER_PLAYLIST_H
 
-#include <queue>
+#include <vector>
 #include <string>
 #include <ctime>
 #include "Track.h"
@@ -22,6 +22,7 @@ public:
     int removeDuplicates();
 
     string getTitle();
+    vector<Track*>* getTracks();
 
     virtual ~Playlist();
 

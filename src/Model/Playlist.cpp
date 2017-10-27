@@ -45,6 +45,10 @@ string Playlist::getTitle() {
     return title;
 }
 
+vector<Track*>* Playlist::getTracks() {
+    return &tracks;
+}
+
 Playlist::~Playlist() {
     for (vector<Track *>::iterator it = tracks.begin(); it != tracks.end(); ++it) {
         delete (*it);

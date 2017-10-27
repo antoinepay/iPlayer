@@ -51,6 +51,18 @@ bool Player::loadNextTrack() {
     return false;
 }
 
+void Player::initNextTracks() {
+    if(currentPlaylist != nullptr) {
+        vector<Track*> *tracks = currentPlaylist->getTracks();
+        for (vector<Track*>::iterator it = tracks->begin(); it!=tracks->end(); ++it) {
+            nextTracks.push_back(*it);
+        }
+    }
+}
+
+
+// Command handlers
+
 string Player::handlePlay() {
     if(isTrackLoaded()) {
         playing = true;
@@ -95,7 +107,10 @@ string Player::handleAddTrack() {
 string Player::handleLoadPlaylist() {
     if(playlists.count(parameterForCommand) == 1) {
         currentPlaylist = playlists[parameterForCommand];
+        initNextTracks();
+        return "Playlist "+currentPlaylist->getTitle()+" loaded";
     }
+    return "Error : Playlist not found";
 }
 
 string Player::handleShowTrack() {

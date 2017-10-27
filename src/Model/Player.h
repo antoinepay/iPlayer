@@ -39,8 +39,10 @@ private:
 
     bool isTrackLoaded();
     bool loadNextTrack();
+    void initNextTracks();
 
     // Command handlers
+
     string handlePlay();
     string handleCreatePlaylist();
     string handleAddTrack();
