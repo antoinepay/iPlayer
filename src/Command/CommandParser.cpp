@@ -21,6 +21,8 @@ Command* CommandParser::parse(string line, Receiver *receiver) {
         return new ShowTrackCommand(receiver, parameter);
     } else if(commandWord == "show_playlist") {
         return new ShowPlaylistCommand(receiver, parameter);
+    } else if(commandWord == "repeat") {
+        return new RepeatCommand(receiver, parameter);
     }
     return nullptr;
 }

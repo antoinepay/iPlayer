@@ -18,6 +18,7 @@ enum COMMAND_TYPE
     LOAD_PLAYLIST,
     SHOW_TRACK,
     SHOW_PLAYLIST,
+    REPEAT,
     NONE
     // Add other commands
 };

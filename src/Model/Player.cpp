@@ -36,6 +36,8 @@ string Player::getResult() {
             return handleShowTrack();
         case SHOW_PLAYLIST:
             return handleShowPlaylist();
+        case REPEAT:
+            return handleRepeat();
 
     }
 }
@@ -59,6 +61,27 @@ void Player::initNextTracks() {
         for (vector<Track*>::iterator it = tracks->begin(); it!=tracks->end(); ++it) {
             nextTracks.push_back(*it);
         }
+    }
+}
+
+REPEAT_MODE Player::parseRepeatMode(string parameter) {
+    if(parameter == "all") {
+        return ALL;
+    } else if(parameter == "one") {
+        return ONE;
+    } else {
+        return NO;
+    }
+}
+
+string Player::getRepeatModeTitle(REPEAT_MODE mode) {
+    switch (mode) {
+        case ALL:
+            return "all";
+        case ONE:
+            return "one";
+        case NO:
+            return "no";
     }
 }
 
@@ -127,6 +150,14 @@ string Player::handleShowPlaylist() {
         return currentPlaylist->getDescription();
     }
     return "Error : No playlist loaded";
+}
+
+string Player::handleRepeat() {
+    if(!parameterForCommand.empty()) {
+        repeatMode = parseRepeatMode(parameterForCommand);
+        return "Repeat mode set to "+getRepeatModeTitle(repeatMode);
+    }
+    return "Error : No repeat mode given!";
 }
 
 Player::~Player() {

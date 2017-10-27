@@ -40,6 +40,9 @@ private:
     bool isTrackLoaded();
     bool loadNextTrack();
     void initNextTracks();
+    REPEAT_MODE parseRepeatMode(string parameter);
+    string getRepeatModeTitle(REPEAT_MODE mode);
+
 
     // Command handlers
 
@@ -49,6 +52,8 @@ private:
     string handleLoadPlaylist();
     string handleShowTrack();
     string handleShowPlaylist();
+    string handleRepeat();
+
 };
 
 

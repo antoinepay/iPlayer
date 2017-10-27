@@ -14,6 +14,7 @@
 #include "../CommandType/LoadPlaylistCommand.h"
 #include "../CommandType/ShowTrackCommand.h"
 #include "../CommandType/ShowPlaylistCommand.h"
+#include "../CommandType/RepeatCommand.h"
 
 using namespace std;
 
