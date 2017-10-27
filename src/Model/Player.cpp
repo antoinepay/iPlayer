@@ -38,6 +38,8 @@ string Player::getResult() {
             return handleShowPlaylist();
         case REPEAT:
             return handleRepeat();
+        case RANDOM:
+            return handleRandom();
 
     }
 }
@@ -83,6 +85,38 @@ string Player::getRepeatModeTitle(REPEAT_MODE mode) {
         case NO:
             return "no";
     }
+}
+
+void Player::shuffleNextTracks() {
+    vector<Track*> newNextTracks;
+    while(!nextTracks.empty()) {
+        int i = rand() % (int)nextTracks.size();
+        newNextTracks.push_back(nextTracks[i]);
+        nextTracks.erase(nextTracks.begin() + i);
+    }
+    nextTracks = newNextTracks;
+}
+
+void Player::restoreNextTracksOrder() {
+    if(currentPlaylist == nullptr) {
+        return;
+    }
+    vector<Track*> *playlistTracks = currentPlaylist->getTracks();
+    vector<Track*> newNextTracks;
+    for (vector<Track*>::iterator it = playlistTracks->begin(); it!=playlistTracks->end(); ++it) {
+        for (vector<Track*>::iterator itNextTracks = nextTracks.begin(); itNextTracks!=nextTracks.end(); ++itNextTracks) {
+            if((*it)->getTitle() == (*itNextTracks)->getTitle()) {
+                newNextTracks.push_back(*itNextTracks);
+            }
+        }
+    }
+    nextTracks = newNextTracks;
+}
+
+bool Player::setRandom(bool enable) {
+    random = enable;
+    random ? shuffleNextTracks() : restoreNextTracksOrder();
+    return random;
 }
 
 
@@ -158,6 +192,18 @@ string Player::handleRepeat() {
         return "Repeat mode set to "+getRepeatModeTitle(repeatMode);
     }
     return "Error : No repeat mode given!";
+}
+
+string Player::handleRandom() {
+    if(!parameterForCommand.empty()) {
+        if(parameterForCommand != "on" && parameterForCommand != "off") {
+            return "Error : Random mode should be on or off";
+        }
+        setRandom(parameterForCommand == "on");
+        string state = random ? "enable" : "disable";
+        return "Random is " + state;
+    }
+    return "Error : Random mode not given, should be on or off";
 }
 
 Player::~Player() {

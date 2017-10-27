@@ -15,6 +15,7 @@
 #include "../CommandType/ShowTrackCommand.h"
 #include "../CommandType/ShowPlaylistCommand.h"
 #include "../CommandType/RepeatCommand.h"
+#include "../CommandType/RandomCommand.h"
 
 using namespace std;
 

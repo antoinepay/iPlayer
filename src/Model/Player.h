@@ -42,7 +42,10 @@ private:
     void initNextTracks();
     REPEAT_MODE parseRepeatMode(string parameter);
     string getRepeatModeTitle(REPEAT_MODE mode);
+    void shuffleNextTracks();
+    void restoreNextTracksOrder();
 
+    bool setRandom(bool enable);
 
     // Command handlers
 
@@ -53,6 +56,7 @@ private:
     string handleShowTrack();
     string handleShowPlaylist();
     string handleRepeat();
+    string handleRandom();
 
 };
 

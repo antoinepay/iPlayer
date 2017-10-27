@@ -23,6 +23,8 @@ Command* CommandParser::parse(string line, Receiver *receiver) {
         return new ShowPlaylistCommand(receiver, parameter);
     } else if(commandWord == "repeat") {
         return new RepeatCommand(receiver, parameter);
+    } else if(commandWord == "random") {
+        return new RandomCommand(receiver, parameter);
     }
     return nullptr;
 }
