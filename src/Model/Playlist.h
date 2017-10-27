@@ -23,6 +23,7 @@ public:
 
     string getTitle();
     vector<Track*>* getTracks();
+    string getDescription();
 
     virtual ~Playlist();
 

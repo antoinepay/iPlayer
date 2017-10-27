@@ -48,6 +48,7 @@ private:
     string handleAddTrack();
     string handleLoadPlaylist();
     string handleShowTrack();
+    string handleShowPlaylist();
 };
 
 

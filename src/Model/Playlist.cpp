@@ -49,6 +49,22 @@ vector<Track*>* Playlist::getTracks() {
     return &tracks;
 }
 
+string Playlist::getDescription() {
+    string description = "/////////////////////////////////\n";
+    description += "Playlist information\n";
+    description += "Title : "+title +"\n";
+    description += "Tracks : \n";
+    int i = 1;
+    for (vector<Track*>::iterator it = tracks.begin(); it!=tracks.end(); ++it) {
+        description += "   - " +to_string(i++) + " : " + (*it)->getTitle() + "\n";
+    }
+    if(i==1) {
+        description += "No tracks in the playlist\n";
+    }
+    description += "/////////////////////////////////\n";
+    return description;
+}
+
 Playlist::~Playlist() {
     for (vector<Track *>::iterator it = tracks.begin(); it != tracks.end(); ++it) {
         delete (*it);

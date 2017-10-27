@@ -34,6 +34,8 @@ string Player::getResult() {
             return handleLoadPlaylist();
         case SHOW_TRACK:
             return handleShowTrack();
+        case SHOW_PLAYLIST:
+            return handleShowPlaylist();
 
     }
 }
@@ -118,6 +120,13 @@ string Player::handleShowTrack() {
         return currentTrack->getDescription();
     }
     return "Error : No track loaded";
+}
+
+string Player::handleShowPlaylist() {
+    if(currentPlaylist != nullptr) {
+        return currentPlaylist->getDescription();
+    }
+    return "Error : No playlist loaded";
 }
 
 Player::~Player() {
