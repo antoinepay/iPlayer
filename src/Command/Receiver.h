@@ -23,6 +23,7 @@ enum COMMAND_TYPE
     REMOVE_TRACK,
     REMOVE_DUPLICATES,
     NEXT,
+    PREVIOUS,
     NONE
     // Add other commands
 };

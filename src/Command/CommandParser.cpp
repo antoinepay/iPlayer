@@ -31,6 +31,8 @@ Command* CommandParser::parse(string line, Receiver *receiver) {
         return new RemoveDuplicatesCommand(receiver, parameter);
     } else if(commandWord == "next") {
         return new NextCommand(receiver, parameter);
+    } else if(commandWord == "previous") {
+        return new PreviousCommand(receiver, parameter);
     }
     return nullptr;
 }

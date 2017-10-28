@@ -19,6 +19,7 @@
 #include "../CommandType/RemoveTrackCommand.h"
 #include "../CommandType/RemoveDuplicatesCommand.h"
 #include "../CommandType/NextCommand.h"
+#include "../CommandType/PreviousCommand.h"
 
 using namespace std;
 

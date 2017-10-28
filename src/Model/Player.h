@@ -63,6 +63,7 @@ private:
     string handleRemoveTrack();
     string handleRemoveDuplicates();
     string handleNextCommand();
+    string handlePreviousCommand();
 };
 
 

@@ -46,6 +46,10 @@ string Player::getResult() {
             return handleRemoveDuplicates();
         case NEXT:
             return handleNextCommand();
+        case PREVIOUS:
+            return handlePreviousCommand();
+        default:
+            return "Error";
 
     }
 }
@@ -303,6 +307,27 @@ string Player::handleNextCommand() {
     } else {
         return "End of playlist";
     }
+}
+
+string Player::handlePreviousCommand() {
+    if(currentTrack != nullptr && repeatMode == ONE) {
+        return "Player is now playing " + currentTrack->getTitle();
+    }
+    if(!previousTracks.empty()) {
+        if(currentTrack != nullptr) {
+            nextTracks.insert(nextTracks.begin(),currentTrack);
+        }
+        currentTrack = previousTracks.back();
+        previousTracks.pop_back();
+        return "Player is now playing " + currentTrack->getTitle();
+    } else if(repeatMode == ALL) {
+        previousTracks = vector<Track*> (currentPlaylist->getTracks()->begin(), currentPlaylist->getTracks()->end());
+        currentTrack = previousTracks.back();
+        previousTracks.pop_back();
+        initNextTracks();
+        return "Player is now playing " + currentTrack->getTitle();
+    }
+    return "Error : No previous tracks";
 }
 
 Player::~Player() {
