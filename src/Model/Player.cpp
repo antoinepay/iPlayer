@@ -63,9 +63,16 @@ bool Player::isTrackLoaded() {
 }
 
 bool Player::loadNextTrack() {
-    if(!nextTracks.empty()) {
+    if(repeatMode == ONE) {
+        return true;
+    }
+    else if(!nextTracks.empty()) {
         currentTrack = nextTracks.front();
         nextTracks.erase(nextTracks.begin());
+        return true;
+    } else if(repeatMode == ALL) {
+        initNextTracks();
+        loadNextTrack();
         return true;
     }
     return false;
@@ -73,10 +80,9 @@ bool Player::loadNextTrack() {
 
 void Player::initNextTracks() {
     if(currentPlaylist != nullptr) {
-        nextTracks.clear();
-        vector<Track*> *tracks = currentPlaylist->getTracks();
-        for (vector<Track*>::iterator it = tracks->begin(); it!=tracks->end(); ++it) {
-            nextTracks.push_back(*it);
+        nextTracks = vector<Track*> (currentPlaylist->getTracks()->begin(), currentPlaylist->getTracks()->end());
+        if (random) {
+            shuffleNextTracks();
         }
     }
 }
@@ -235,6 +241,8 @@ string Player::handleAddTrack() {
 string Player::handleLoadPlaylist() {
     if(playlists.count(parameterForCommand) == 1) {
         currentPlaylist = playlists[parameterForCommand];
+        previousTracks.clear();
+        currentTrack = nullptr;
         initNextTracks();
         return "Playlist "+currentPlaylist->getTitle()+" loaded";
     }
@@ -299,7 +307,10 @@ string Player::handleRemoveDuplicates() {
 }
 
 string Player::handleNextCommand() {
-    if(currentTrack != nullptr) {
+    if(currentTrack != nullptr && repeatMode != ONE) {
+        if(previousTracks.size() == currentPlaylist->getTracks()->size()) {
+            previousTracks.erase(previousTracks.begin());
+        }
         previousTracks.push_back(currentTrack);
     }
     bool loaded = loadNextTrack();
@@ -307,6 +318,7 @@ string Player::handleNextCommand() {
     if(playing) {
         return "Player is now playing " + currentTrack->getTitle();
     } else {
+        currentTrack = nullptr;
         return "End of playlist";
     }
 }
