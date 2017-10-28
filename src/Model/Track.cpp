@@ -17,7 +17,7 @@ Track::Track(string title, int duration, CODEC_TYPE codecType) {
 
 
 string Track::getDescription() {
-    string description = "/////////////////////////////////\n";
+    string description = "\n/////////////////////////////////\n";
     description += "Track information\n";
     description += "Title : " + title + "\n";
     description += "Duration : " + to_string(duration) + "\n";

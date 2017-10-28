@@ -6,8 +6,10 @@ using namespace std;
 #include "Command/CommandParser.h"
 
 int main() {
+    cout << "Imaginary Player v1.0" << endl;
     Player *player = new Player();
     string commandLine;
+    cout << endl << ">>> ";
     while(getline(cin,commandLine) && commandLine != "exit") {
         Command *command = CommandParser::parse(commandLine, player);
         if (command != nullptr) {
@@ -15,6 +17,8 @@ int main() {
         } else {
             cout << "Unknown command" << endl;
         }
+        cout << endl;
+        cout << ">>> " + player->displayPlaylist();
     }
     return 0;
 }

@@ -8,7 +8,6 @@ MusicManager MusicManager::m_instance=MusicManager();
 
 MusicManager::MusicManager()
 {
-    cout<<"Initialization of Repository"<<endl;
     Track *t1 = new Track("pop_01.music",248,CODEC_TYPE::MP3);
     Track *t2 = new Track("electro_01.music",248,CODEC_TYPE::MP3);
     Track *t3 = new Track("jazz_01.music",480,CODEC_TYPE::WAV);
@@ -19,6 +18,13 @@ MusicManager::MusicManager()
     library["jazz_01.music"] = t3;
     library["blues_01.music"] = t4;
     library["blues_02.music"] = t5;
+
+    Track *t6 = new Track("1",248,CODEC_TYPE::MP3);
+    Track *t7 = new Track("2",248,CODEC_TYPE::MP3);
+    Track *t8 = new Track("3",248,CODEC_TYPE::MP3);
+    library["1"] = t6;
+    library["2"] = t7;
+    library["3"] = t8;
 }
 
 MusicManager& MusicManager::Instance()
@@ -36,6 +42,6 @@ Track* MusicManager::getTrack(string title) {
 
 MusicManager::~MusicManager()
 {
-    cout<<"Close Repository"<<endl;
+
 }
 

@@ -23,6 +23,8 @@ public:
     void setCommand(COMMAND_TYPE commandType, string parameter);
     string getResult();
 
+    string displayPlaylist();
+
 
     virtual ~Player();
 private:

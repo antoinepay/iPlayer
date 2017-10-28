@@ -53,7 +53,7 @@ vector<Track*>* Playlist::getTracks() {
 }
 
 string Playlist::getDescription() {
-    string description = "/////////////////////////////////\n";
+    string description = "\n/////////////////////////////////\n";
     description += "Playlist information\n";
     description += "Title : "+title +"\n";
     description += "Tracks : \n";

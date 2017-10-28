@@ -54,6 +54,10 @@ string Player::getResult() {
     }
 }
 
+string Player::displayPlaylist() {
+    return currentPlaylist != nullptr ? currentPlaylist->getTitle() + " > " : "";
+}
+
 bool Player::isTrackLoaded() {
     return currentTrack != nullptr;
 }
@@ -246,15 +250,13 @@ string Player::handleShowTrack() {
 
 string Player::handleShowPlaylist() {
     if(currentPlaylist != nullptr) {
-        string description = "/////////////////////////////////\n";
-        description += currentPlaylist->getDescription();
+        string description = currentPlaylist->getDescription();
         description += "\nPrevious tracks :\n";
         description += getPreviousTracksList();
-        description += "\nPlaying : \n";
-        description += playing ? currentTrack->getDescription() : "None";
+        description += playing ? "\nPlaying : \n" : "\nPaused : \n";
+        description += currentTrack != nullptr ? currentTrack->getDescription() : "None";
         description += "\n\nNext tracks :\n";
         description += getNextTracksList();
-        description += "/////////////////////////////////\n";
         return description;
     }
     return "Error : No playlist loaded";
