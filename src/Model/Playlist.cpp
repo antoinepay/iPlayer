@@ -30,7 +30,6 @@ void Playlist::removeTrack(string title) {
 
 int Playlist::removeDuplicates() {
     int deleted = 0;
-    bool trackDeleted = false;
     for (vector<Track*>::iterator it = tracks.begin(); it != tracks.end();++it) {
         for (vector<Track*>::iterator itDel = it+1; itDel != tracks.end();) {
             if((*it)->getTitle() == (*itDel)->getTitle()) {

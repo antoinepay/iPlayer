@@ -16,7 +16,6 @@ public:
     static MusicManager& Instance();
     Track* getTrack(string title);
 private:
-    MusicManager& operator= (const MusicManager&){}
     MusicManager (const MusicManager&){}
 
     static MusicManager m_instance;
