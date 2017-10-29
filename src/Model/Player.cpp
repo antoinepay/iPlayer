@@ -64,6 +64,9 @@ bool Player::isTrackLoaded() {
 }
 
 bool Player::loadNextTrack() {
+    if(currentPlaylist->getTracks()->empty()) {
+        return false;
+    }
     if(repeatMode == ONE) {
         return true;
     }
