@@ -47,6 +47,8 @@ string Player::getResult() {
             return handleNextCommand();
         case PREVIOUS:
             return handlePreviousCommand();
+        case HELP:
+            return handleHelpCommand();
         default:
             return "Error";
 
@@ -341,6 +343,25 @@ string Player::handlePreviousCommand() {
         return "Player is now playing " + currentTrack->getTitle();
     }
     return "Error : No previous tracks";
+}
+
+string Player::handleHelpCommand() {
+    string description = "Help : Here are the possible commands of the program\n";
+    description += "\tadd_track <track_title>\n";
+    description += "\tremove_track <track_title>\n";
+    description += "\tcreate_playlist <playlist_title>\n";
+    description += "\tload_playlist <playlist_title>\n";
+    description += "\tshow_playlist (if a playlist is loaded)\n";
+    description += "\tshow_track (if a track is loaded)\n";
+    description += "\tplay\n";
+    description += "\tpause\n";
+    description += "\tnext\n";
+    description += "\tprevious\n";
+    description += "\tremove_duplicates (from the playlist)\n";
+    description += "\trandom on || off\n";
+    description += "\trepeat no || one || all\n";
+    description += "\texit (to quit the program)\n";
+    return description;
 }
 
 Player::~Player() {

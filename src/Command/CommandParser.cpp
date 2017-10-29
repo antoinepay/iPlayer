@@ -33,6 +33,8 @@ Command* CommandParser::parse(string line, Receiver *receiver) {
         return new NextCommand(receiver, parameter);
     } else if(commandWord == "previous") {
         return new PreviousCommand(receiver, parameter);
+    } else if(commandWord == "help") {
+        return new HelpCommand(receiver, parameter);
     }
     return nullptr;
 }

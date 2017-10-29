@@ -67,6 +67,7 @@ private:
     string handleRemoveDuplicates();
     string handleNextCommand();
     string handlePreviousCommand();
+    string handleHelpCommand();
 };
 
 

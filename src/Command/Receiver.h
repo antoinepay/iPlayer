@@ -24,6 +24,7 @@ enum COMMAND_TYPE
     REMOVE_DUPLICATES,
     NEXT,
     PREVIOUS,
+    HELP,
     NONE
     // Add other commands
 };

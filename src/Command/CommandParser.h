@@ -20,6 +20,7 @@
 #include "../CommandType/RemoveDuplicatesCommand.h"
 #include "../CommandType/NextCommand.h"
 #include "../CommandType/PreviousCommand.h"
+#include "../CommandType/HelpCommand.h"
 
 using namespace std;
 
