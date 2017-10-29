@@ -194,13 +194,10 @@ bool Player::setRandom(bool enable) {
 // Command handlers
 
 string Player::handlePlay() {
-    if(isTrackLoaded()) {
-        playing = true;
-    } else if(loadNextTrack()) {
-        playing = true;
-    } else {
+    if(!isTrackLoaded() && !loadNextTrack()) {
         return "Impossible to play, no musics loaded";
     }
+    playing = true;
     return "Player is now playing " + currentTrack->getTitle();
 }
 
