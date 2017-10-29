@@ -16,7 +16,7 @@ int main() {
         if (command != nullptr) {
             cout << command->execute() << endl;
         } else {
-            cout << "Unknown command" << endl;
+            cout << "Unknown command : type \"help\" for more information" << endl;
         }
         cout << endl;
         cout << ">>> " + player->displayPlaylist();
