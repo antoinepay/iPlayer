@@ -24,8 +24,7 @@ string Player::getResult() {
         case PLAY:
             return handlePlay();
         case PAUSE:
-            playing = false;
-            return "Player is paused";
+            return handlePause();
         case CREATE_PLAYLIST:
             return handleCreatePlaylist();
         case ADD_TRACK:
@@ -199,6 +198,11 @@ string Player::handlePlay() {
     }
     playing = true;
     return "Player is now playing " + currentTrack->getTitle();
+}
+
+string Player::handlePause() {
+    playing = false;
+    return "Player is paused";
 }
 
 string Player::handleCreatePlaylist() {

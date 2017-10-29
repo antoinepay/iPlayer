@@ -55,6 +55,7 @@ private:
     // Command handlers
 
     string handlePlay();
+    string handlePause();
     string handleCreatePlaylist();
     string handleAddTrack();
     string handleLoadPlaylist();
