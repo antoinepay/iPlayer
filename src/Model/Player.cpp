@@ -202,99 +202,97 @@ string Player::handlePlay() {
 }
 
 string Player::handleCreatePlaylist() {
-    if(!parameterForCommand.empty()) {
-        Playlist *playlist = new Playlist(parameterForCommand);
-        playlists[parameterForCommand] = playlist;
-        return "Playlist " + parameterForCommand + " created";
-    } else {
+    if(parameterForCommand.empty()) {
         return "Error : No playlist title given!";
     }
+    Playlist *playlist = new Playlist(parameterForCommand);
+    playlists[parameterForCommand] = playlist;
+    return "Playlist " + parameterForCommand + " created";
 }
 
 string Player::handleAddTrack() {
-    if(!parameterForCommand.empty()) {
-        MusicManager &musicManager = MusicManager::Instance();
-        Track *track = musicManager.getTrack(parameterForCommand);
-        if(track != nullptr) {
-            if(currentPlaylist == nullptr) {
-                string playlistTitle = "New playlist";
-                currentPlaylist = new Playlist(playlistTitle);
-                playlists[playlistTitle] = currentPlaylist;
-                currentPlaylist->addTrack(track);
-                initNextTracks();
-            } else {
-                currentPlaylist->addTrack(track);
-                nextTracks.push_back(track);
-            }
-            return "Track "+track->getTitle()+ " added to "+currentPlaylist->getTitle();
-        } else {
-            return "Error : Music not found";
-        }
-    } else {
+    if(parameterForCommand.empty()) {
         return "Error : No music title given!";
+    }
+    MusicManager &musicManager = MusicManager::Instance();
+    Track *track = musicManager.getTrack(parameterForCommand);
+    if(track != nullptr) {
+        if(currentPlaylist == nullptr) {
+            string playlistTitle = "New playlist";
+            currentPlaylist = new Playlist(playlistTitle);
+            playlists[playlistTitle] = currentPlaylist;
+            currentPlaylist->addTrack(track);
+            initNextTracks();
+        } else {
+            currentPlaylist->addTrack(track);
+            nextTracks.push_back(track);
+        }
+        return "Track "+track->getTitle()+ " added to "+currentPlaylist->getTitle();
+    } else {
+        return "Error : Music not found";
     }
 }
 
 string Player::handleLoadPlaylist() {
-    if(playlists.count(parameterForCommand) == 1) {
-        currentPlaylist = playlists[parameterForCommand];
-        previousTracks.clear();
-        currentTrack = nullptr;
-        initNextTracks();
-        return "Playlist "+currentPlaylist->getTitle()+" loaded";
+    if(playlists.count(parameterForCommand) == 0) {
+        return "Error : Playlist not found";
     }
-    return "Error : Playlist not found";
+    currentPlaylist = playlists[parameterForCommand];
+    previousTracks.clear();
+    currentTrack = nullptr;
+    initNextTracks();
+    return "Playlist "+currentPlaylist->getTitle()+" loaded";
 }
 
 string Player::handleShowTrack() {
-    if (currentTrack != nullptr) {
-        return currentTrack->getDescription();
+    if(currentTrack == nullptr) {
+        return "Error : No track loaded";
     }
-    return "Error : No track loaded";
+    return currentTrack->getDescription();
 }
 
 string Player::handleShowPlaylist() {
-    if(currentPlaylist != nullptr) {
-        string description = currentPlaylist->getDescription();
-        description += "\nPrevious tracks :\n";
-        description += getPreviousTracksList();
-        description += playing ? "\nPlaying : \n" : "\nPaused : \n";
-        description += currentTrack != nullptr ? currentTrack->getDescription() : "None";
-        description += "\n\nNext tracks :\n";
-        description += getNextTracksList();
-        return description;
+    if(currentPlaylist == nullptr) {
+        return "Error : No playlist loaded";
     }
-    return "Error : No playlist loaded";
+    string description = currentPlaylist->getDescription();
+    description += "\nPrevious tracks :\n";
+    description += getPreviousTracksList();
+    description += playing ? "\nPlaying : \n" : "\nPaused : \n";
+    description += currentTrack != nullptr ? currentTrack->getDescription() : "None";
+    description += "\n\nNext tracks :\n";
+    description += getNextTracksList();
+    return description;
 }
 
 string Player::handleRepeat() {
-    if(!parameterForCommand.empty()) {
-        repeatMode = parseRepeatMode(parameterForCommand);
-        return "Repeat mode set to "+getRepeatModeTitle(repeatMode);
+    if(parameterForCommand.empty()) {
+        return "Error : No repeat mode given!";
     }
-    return "Error : No repeat mode given!";
+    repeatMode = parseRepeatMode(parameterForCommand);
+    return "Repeat mode set to "+getRepeatModeTitle(repeatMode);
 }
 
 string Player::handleRandom() {
-    if(!parameterForCommand.empty()) {
-        if(parameterForCommand != "on" && parameterForCommand != "off") {
-            return "Error : Random mode should be on or off";
-        }
-        setRandom(parameterForCommand == "on");
-        string state = random ? "enable" : "disable";
-        return "Random is " + state;
+    if(parameterForCommand.empty()) {
+        return "Error : Random mode not given, should be on or off";
     }
-    return "Error : Random mode not given, should be on or off";
+    if(parameterForCommand != "on" && parameterForCommand != "off") {
+        return "Error : Random mode should be on or off";
+    }
+    setRandom(parameterForCommand == "on");
+    string state = random ? "enable" : "disable";
+    return "Random is " + state;
 }
 
 string Player::handleRemoveTrack() {
-    if(!parameterForCommand.empty()) {
-        if(removeTrack(parameterForCommand)) {
-            return "Track "+parameterForCommand+ " deleted";
-        }
-        return "Track "+parameterForCommand+ " not found";
+    if(parameterForCommand.empty()) {
+        return "Error : No track title given!";
     }
-    return "Error : No track title given!";
+    if(removeTrack(parameterForCommand)) {
+        return "Track "+parameterForCommand+ " deleted";
+    }
+    return "Track "+parameterForCommand+ " not found";
 }
 
 string Player::handleRemoveDuplicates() {
