@@ -56,12 +56,12 @@ string Playlist::getDescription() {
     description += "Playlist information\n";
     description += "Title : "+title +"\n";
     description += "Tracks : \n";
-    int i = 1;
-    for (vector<Track*>::iterator it = tracks.begin(); it!=tracks.end(); ++it) {
-        description += "   - " +to_string(i++) + " : " + (*it)->getTitle() + "\n";
-    }
-    if(i==1) {
+    if(tracks.empty()) {
         description += "No tracks in the playlist\n";
+    } else {
+        for (int i = 0; i < tracks.size(); i++) {
+            description += "   - " +to_string(i+1) + " : " + tracks[i]->getTitle() + "\n";
+        }
     }
     description += "/////////////////////////////////\n";
     return description;
