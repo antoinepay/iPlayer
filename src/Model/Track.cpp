@@ -4,15 +4,17 @@
 #include "Track.h"
 
 Track::Track() {
-    this->title = "";
-    this->duration = 0;
-    this->codecType = CODEC_TYPE::UNKNOWN;
+    title = "";
+    duration = 0;
+    codecType = CODEC_TYPE::UNKNOWN;
+    samplingFrequency = 0;
 }
 
-Track::Track(string title, int duration, CODEC_TYPE codecType) {
+Track::Track(string title, int duration, CODEC_TYPE codecType, int samplingFrequency) {
     this->title = title;
     this->duration = duration;
     this->codecType = codecType;
+    this->samplingFrequency = samplingFrequency;
 }
 
 
@@ -22,6 +24,7 @@ string Track::getDescription() {
     description += "Title : " + title + "\n";
     description += "Duration : " + to_string(duration) + "\n";
     description += "Codec : " + getCodecTitle() + "\n";
+    description += "Sampling frequency : " + to_string(samplingFrequency) + " Hz\n";
     description += "/////////////////////////////////\n";
     return description;
 }

@@ -24,7 +24,7 @@ class Track {
 
 public:
     Track();
-    Track(string title, int duration, CODEC_TYPE codecType);
+    Track(string title, int duration, CODEC_TYPE codecType, int samplingFrequency);
 
     string getDescription();
     string getTitle();
@@ -35,6 +35,7 @@ private:
     string title;
     int duration;
     CODEC_TYPE codecType;
+    int samplingFrequency;
 
     string getCodecTitle();
 };
