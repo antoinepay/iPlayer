@@ -368,14 +368,7 @@ string Player::handleHelpCommand() {
 }
 
 Player::~Player() {
-    delete currentTrack;
-    for (vector<Track *>::iterator it = previousTracks.begin(); it != previousTracks.end(); ++it) {
-        delete (*it);
-    }
     previousTracks.clear();
-    for (vector<Track *>::iterator it = nextTracks.begin(); it != nextTracks.end(); ++it) {
-        delete (*it);
-    }
     nextTracks.clear();
     for (map<string, Playlist *>::iterator it = playlists.begin(); it != playlists.end(); ++it) {
         delete it->second;

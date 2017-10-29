@@ -21,5 +21,6 @@ int main() {
         cout << endl;
         cout << ">>> " + player->displayPlaylist();
     }
+    delete player;
     return 0;
 }
