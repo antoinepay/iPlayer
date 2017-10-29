@@ -9,3 +9,8 @@ cd src
 make
 ../bin/iplayer
 ```
+
+## Run instructions 
+```
+To list all the commands possible, type "help"
+```
