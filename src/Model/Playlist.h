@@ -24,6 +24,7 @@ public:
     string getTitle();
     vector<Track*>* getTracks();
     string getDescription();
+    void playlistModified();
 
     virtual ~Playlist();
 

@@ -235,6 +235,7 @@ string Player::handleAddTrack() {
         } else {
             currentPlaylist->addTrack(track);
             nextTracks.push_back(track);
+            currentPlaylist->playlistModified();
         }
         return "Track "+track->getTitle()+ " added to "+currentPlaylist->getTitle();
     } else {
@@ -299,6 +300,7 @@ string Player::handleRemoveTrack() {
         return "Error : No track title given!";
     }
     if(removeTrack(parameterForCommand)) {
+        currentPlaylist->playlistModified();
         return "Track "+parameterForCommand+ " deleted";
     }
     return "Track "+parameterForCommand+ " not found";
@@ -306,6 +308,9 @@ string Player::handleRemoveTrack() {
 
 string Player::handleRemoveDuplicates() {
     int deleted = currentPlaylist->removeDuplicates();
+    if(deleted > 0) {
+        currentPlaylist->playlistModified();
+    }
     initNextTracks();
     return to_string(deleted) + " tracks deleted";
 }

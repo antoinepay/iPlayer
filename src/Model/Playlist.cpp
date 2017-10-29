@@ -63,8 +63,14 @@ string Playlist::getDescription() {
             description += "   - " +to_string(i+1) + " : " + tracks[i]->getTitle() + "\n";
         }
     }
+    description += "Created : " + string(ctime(&createdAt));
+    description += "Modified : " + string(ctime(&modifiedAt));
     description += "/////////////////////////////////\n";
     return description;
+}
+
+void Playlist::playlistModified() {
+    modifiedAt = time(nullptr);
 }
 
 Playlist::~Playlist() {
